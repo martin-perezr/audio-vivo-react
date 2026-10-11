@@ -1,13 +1,14 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import productos from '../data/productos.json'
 import categorias from '../data/categorias.json'
+import { useProductos } from '../context/ProductosContext'
 import { PlantillaPublica } from '../components/templates/PlantillaPublica/PlantillaPublica'
 import { FiltroCategoria } from '../components/molecules/FiltroCategoria/FiltroCategoria'
 import { CatalogoProductos } from '../components/organisms/CatalogoProductos/CatalogoProductos'
 
 export default function Catalogo() {
   const navigate = useNavigate()
-  const { slug = '' } = useParams() // en /catalogo no hay slug: queda ''
+  const { slug = '' } = useParams() 
+  const { productos } = useProductos()
 
   const categoria = categorias.find((c) => c.slug === slug)
   const visibles = categoria
@@ -18,7 +19,6 @@ export default function Catalogo() {
     navigate(nuevoSlug ? `/categoria/${nuevoSlug}` : '/catalogo')
   }
 
-  
   function agregarAlCarrito(producto) {
     console.log('Agregar al carrito:', producto.nombre)
   }
