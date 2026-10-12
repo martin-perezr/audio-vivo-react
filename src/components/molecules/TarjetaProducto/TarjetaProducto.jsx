@@ -5,7 +5,7 @@ import { Boton } from '../../atoms/Boton/Boton'
 import { hayStock } from '../../../utils/stock'
 import './TarjetaProducto.css'
 
-export function TarjetaProducto({ producto, onAgregar }) {
+export function TarjetaProducto({ producto, onAgregar, onVer }) {
   return (
     <Card className="tarjeta-producto h-100">
       <Card.Img
@@ -20,14 +20,16 @@ export function TarjetaProducto({ producto, onAgregar }) {
           {producto.marca} · {producto.modelo}
         </p>
         <Precio valor={producto.precio} />
+         // ...
         <EtiquetaStock stock={producto.stock} />
+        <Boton variante="filtro" onClick={() => onVer(producto.id)}>
+          Ver detalle
+        </Boton>
         <Boton
-          variante="comprar"
-          deshabilitado={!hayStock(producto)}
-          onClick={() => onAgregar(producto)}
-        >
+          variante="comprar">
           Agregar al carrito
         </Boton>
+
       </Card.Body>
     </Card>
   )

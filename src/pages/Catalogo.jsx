@@ -29,7 +29,9 @@ export default function Catalogo() {
         {categoria ? categoria.nombre : 'Catálogo completo'}
       </h1>
       <FiltroCategoria categorias={categorias} activa={slug} onElegir={elegirCategoria} />
-      <CatalogoProductos productos={visibles} onAgregar={agregarAlCarrito} />
+      <CatalogoProductos productos={visibles} onAgregar={agregarAlCarrito} onVer={(id) => navigate(`/producto/${id}`)} />
+     
     </PlantillaPublica>
   )
+ 
 }
