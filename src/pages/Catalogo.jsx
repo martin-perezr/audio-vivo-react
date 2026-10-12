@@ -4,6 +4,7 @@ import { useProductos } from '../context/ProductosContext'
 import { PlantillaPublica } from '../components/templates/PlantillaPublica/PlantillaPublica'
 import { FiltroCategoria } from '../components/molecules/FiltroCategoria/FiltroCategoria'
 import { CatalogoProductos } from '../components/organisms/CatalogoProductos/CatalogoProductos'
+import { useTituloPagina } from '../hooks/useTituloPagina'
 
 export default function Catalogo() {
   const navigate = useNavigate()
@@ -11,6 +12,7 @@ export default function Catalogo() {
   const { productos } = useProductos()
 
   const categoria = categorias.find((c) => c.slug === slug)
+  useTituloPagina(categoria ? categoria.nombre : 'Catálogo')
   const visibles = categoria
     ? productos.filter((p) => p.categoria === categoria.nombre)
     : productos
