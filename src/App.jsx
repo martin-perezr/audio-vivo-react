@@ -12,7 +12,7 @@ export default function App() {
         <Route path="/" element={<Inicio />} />
         <Route path="/catalogo" element={<Catalogo />} />
         <Route path="/categoria/:slug" element={<Catalogo />} />
-        <Route path="/iniciar-sesion" element={<InicioSesion />} />
+        <Route path="/login" element={<InicioSesion />} />
         <Route path="*" element={<NoEncontrada />} />
       </Routes>
     </BrowserRouter>
