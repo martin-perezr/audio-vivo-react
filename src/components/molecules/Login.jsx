@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import { CampoFormulario } from './CampoFormulario/CampoFormulario'
 import { Boton } from '../atoms/Boton/Boton'
-import { validarCorreo, validarPassword } from '../../utils/validaciones'
+import { validarCorreo, validarPassword } from '../../utils/Validaciones'
 
 function Login({ onExito }) {
   const [correo, setCorreo] = useState('')

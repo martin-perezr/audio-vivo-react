@@ -2,11 +2,12 @@ import { useNavigate } from 'react-router-dom'
 import categorias from '../data/categorias.json'
 import { PlantillaPublica } from '../components/templates/PlantillaPublica/PlantillaPublica'
 import { CarruselCategorias } from '../components/organisms/CarruselCategorias/CarruselCategorias'
+import { useTituloPagina } from '../hooks/useTituloPagina'
 import './Inicio.css'
 
 export default function Inicio() {
   const navigate = useNavigate()
-
+  useTituloPagina('Inicio')
   return (
     <PlantillaPublica>
       <section className="seccion-video">
