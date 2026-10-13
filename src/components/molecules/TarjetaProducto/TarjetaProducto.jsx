@@ -20,16 +20,17 @@ export function TarjetaProducto({ producto, onAgregar, onVer }) {
           {producto.marca} · {producto.modelo}
         </p>
         <Precio valor={producto.precio} />
-         // ...
         <EtiquetaStock stock={producto.stock} />
         <Boton variante="filtro" onClick={() => onVer(producto.id)}>
           Ver detalle
         </Boton>
         <Boton
-          variante="comprar">
+          variante="comprar"
+          deshabilitado={!hayStock(producto)}
+          onClick={() => onAgregar(producto)}
+        >
           Agregar al carrito
         </Boton>
-
       </Card.Body>
     </Card>
   )
