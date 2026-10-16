@@ -24,3 +24,27 @@ export function validarPassword(texto){
     }
     return ''
 }
+
+export function validarNombre(texto) {
+  const nombre = texto.trim()
+
+  if (nombre === '') {
+    return 'Ingresa tu nombre.'
+  }
+
+  if (nombre.length < 3) {
+    return 'El nombre debe tener al menos 3 letras.'
+  }
+  return ''
+}
+
+export function validarConfirmacion(password, confirmacion) {
+  if (confirmacion === '') {
+    return 'Repite tu contraseña.'
+  }
+
+  if (password !== confirmacion) {
+    return 'Las contraseñas no coinciden.'
+  }
+  return ''
+}

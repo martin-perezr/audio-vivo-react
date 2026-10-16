@@ -1,0 +1,16 @@
+[
+    {
+        "id": 1,
+        "nombre": "Administrador Sonido Vivo",
+        "correo": "admin@sonidovivo.cl",
+        "password": "admin-sonido-2026",
+        "rol": "admin"
+    },
+    {
+        "id": 2,
+        "nombre": "Cliente de Prueba",
+        "correo": "cliente@correo.cl",
+        "password": "cliente-prueba-2026",
+        "rol": "cliente"
+    }
+]
