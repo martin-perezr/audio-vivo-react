@@ -3,6 +3,7 @@ import Inicio from './pages/Inicio'
 import Catalogo from './pages/Catalogo'
 import NoEncontrada from './pages/NoEncontrada'
 import InicioSesion from './pages/InicioSesion'
+import Registro from './pages/Registro'
 import DetalleProducto from './pages/DetalleProducto'
 
 // App conecta cada dirección (URL) con su página.
@@ -14,6 +15,7 @@ export default function App() {
         <Route path="/catalogo" element={<Catalogo />} />
         <Route path="/categoria/:slug" element={<Catalogo />} />
         <Route path="/login" element={<InicioSesion />} />
+        <Route path="/registro" element={<Registro />} />
         <Route path="/producto/:id" element={<DetalleProducto />} />
         <Route path="*" element={<NoEncontrada />} />
       </Routes>

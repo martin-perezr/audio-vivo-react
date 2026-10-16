@@ -2,13 +2,13 @@ import { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import { CampoFormulario } from './CampoFormulario/CampoFormulario'
 import { Boton } from '../atoms/Boton/Boton'
-import { validarCorreo, validarPassword } from "../../utils/Validaciones";
+import { validarCorreo, validarPassword } from '../../utils/Validaciones'
 
-function Login({ onExito }) {
+
+function Login({ onEnviar, error }) {
   const [correo, setCorreo] = useState('')
   const [password, setPassword] = useState('')
   const [errores, setErrores] = useState({ correo: '', password: '' })
-  const [mensaje, setMensaje] = useState('')
 
   function manejarEnvio(e) {
     e.preventDefault()
@@ -20,16 +20,10 @@ function Login({ onExito }) {
     setErrores(nuevosErrores)
 
     if (nuevosErrores.correo || nuevosErrores.password) {
-      setMensaje('')
       return
     }
 
-    localStorage.setItem('sesionIniciada', 'true')
-    setMensaje('¡Sesión iniciada correctamente!')
-
-    if (onExito) {
-      setTimeout(onExito, 1000)
-    }
+    onEnviar({ correo, password })
   }
 
   return (
@@ -56,9 +50,9 @@ function Login({ onExito }) {
 
       <Boton tipo="submit" variante="login">Ingresar</Boton>
 
-      {mensaje && (
-        <p className="text-success fw-bold text-center mt-3 mb-0" role="status">
-          {mensaje}
+      {error && (
+        <p className="text-danger fw-bold text-center mt-3 mb-0" role="alert">
+          {error}
         </p>
       )}
     </Form>
