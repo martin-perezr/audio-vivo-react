@@ -11,6 +11,7 @@ import AdminCriticos from './pages/admin/AdminCriticos'
 import Categorias from './pages/Categorias'
 import Ofertas from './pages/Ofertas'
 import Nosotros from './pages/Nosotros'
+import AdminPedidos from './pages/admin/AdminPedidos'
 
 // App conecta cada dirección (URL) con su página.
 export default function App() {
@@ -27,9 +28,11 @@ export default function App() {
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/productos" element={<AdminProductos />} />
         <Route path="/admin/criticos" element={<AdminCriticos />} />
+        <Route path="/admin/pedidos" element={<AdminPedidos />} />
         <Route path="/categorias" element={<Categorias />} />
         <Route path="/ofertas" element={<Ofertas />} />
         <Route path="/nosotros" element={<Nosotros />} />
+        
       </Routes>
     </BrowserRouter>
   )

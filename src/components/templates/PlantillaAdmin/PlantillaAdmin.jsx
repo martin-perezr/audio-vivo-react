@@ -35,6 +35,7 @@ export function PlantillaAdmin({ children }) {
               <Nav.Link href="/admin" onClick={ir('/admin')}>Resumen</Nav.Link>
               <Nav.Link href="/admin/productos" onClick={ir('/admin/productos')}>Productos</Nav.Link>
               <Nav.Link href="/admin/criticos" onClick={ir('/admin/criticos')}>Stock crítico</Nav.Link>
+              <Nav.Link href="/admin/pedidos" onClick={ir('/admin/pedidos')}>Pedidos</Nav.Link>
               <Nav.Link href="/" onClick={ir('/')}>Ver tienda</Nav.Link>
             </Nav>
           </BarraBootstrap.Collapse>
