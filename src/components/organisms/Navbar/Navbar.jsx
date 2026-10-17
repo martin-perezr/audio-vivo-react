@@ -41,6 +41,15 @@ export function Navbar({ cantidadCarrito, onNavegar }) {
             <Nav.Link href="/login" onClick={ir('/login')}>
               Iniciar Sesión
             </Nav.Link>
+            <Nav.Link href="/categorias" onClick={ir('/categorias')}>
+              Categorías
+            </Nav.Link>
+            <Nav.Link href="/ofertas" onClick={ir('/ofertas')}>
+              Ofertas
+            </Nav.Link>
+            <Nav.Link href="/nosotros" onClick={ir('/nosotros')}>
+              Nosotros
+            </Nav.Link>
           </Nav>
         </BarraBootstrap.Collapse>
       </Container>

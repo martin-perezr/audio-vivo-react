@@ -1,11 +1,13 @@
 import Container from 'react-bootstrap/Container'
 import BarraBootstrap from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
+import { obtenerSesion } from '../../../services/usuarioService'
 
 // Plantilla del panel de administración: menú propio y el contenido de cada página.
 export function PlantillaAdmin({ children }) {
   const navigate = useNavigate()
+  const sesion = obtenerSesion()
 
   // Enlaces reales (<a href>) que navegan sin recargar la página.
   function ir(ruta) {
@@ -13,6 +15,11 @@ export function PlantillaAdmin({ children }) {
       e.preventDefault()
       navigate(ruta)
     }
+  }
+
+  // Si no hay sesión de administrador, se va al login (sin mostrar el panel).
+  if (!sesion || sesion.rol !== 'admin') {
+    return <Navigate to="/login" replace />
   }
 
   return (

@@ -3,6 +3,8 @@ import { Precio } from '../../atoms/Precio/Precio'
 import { EtiquetaStock } from '../../atoms/EtiquetaStock/EtiquetaStock'
 import { Boton } from '../../atoms/Boton/Boton'
 import { hayStock } from '../../../utils/stock'
+import { esOferta, porcentajeDescuento } from '../../../utils/ofertas'
+import { formatoPrecio } from '../../../utils/formatoPrecio'
 import './TarjetaProducto.css'
 
 export function TarjetaProducto({ producto, onAgregar, onVer }) {
@@ -20,6 +22,11 @@ export function TarjetaProducto({ producto, onAgregar, onVer }) {
           {producto.marca} · {producto.modelo}
         </p>
         <Precio valor={producto.precio} />
+        {esOferta(producto) && (
+          <p className="text-success fw-bold small mb-0">
+            Antes <s>{formatoPrecio(producto.precioAnterior)}</s> · {porcentajeDescuento(producto)}% de descuento
+          </p>
+        )}
         <EtiquetaStock stock={producto.stock} />
         <Boton variante="filtro" onClick={() => onVer(producto.id)}>
           Ver detalle
