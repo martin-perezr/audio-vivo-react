@@ -28,6 +28,11 @@ export function listarPedidosDe(correo) {
   return leer().filter((pedido) => pedido.correo === correo)
 }
 
+// Busca un pedido por su número; si no existe, devuelve null.
+export function obtenerPedido(id) {
+  return leer().find((pedido) => pedido.id === id) ?? null
+}
+
 // datos: nombre, apellidos, correo, entrega, direccion y comuna. items: lo que hay en el carrito.
 export function crearPedido(datos, items) {
   // 1) Se revisa el stock actual de cada producto antes de tocar nada.

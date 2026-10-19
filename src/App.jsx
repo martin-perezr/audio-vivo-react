@@ -13,6 +13,8 @@ import MisPedidos from './pages/MisPedidos'
 
 import AdminDashboard from './pages/admin/AdminDashboard'
 import AdminProductos from './pages/admin/AdminProductos'
+import AdminComprobante from './pages/admin/AdminComprobante'
+import AdminHistorial from './pages/admin/AdminHistorial'
 import AdminCriticos from './pages/admin/AdminCriticos'
 
 // App conecta cada dirección (URL) con su página.
@@ -35,6 +37,8 @@ export default function App() {
         <Route path="*" element={<NoEncontrada />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/productos" element={<AdminProductos />} />
+        <Route path="/admin/pedidos/:id" element={<AdminComprobante />} />
+        <Route path="/admin/historial" element={<AdminHistorial />} />
         <Route path="/admin/criticos" element={<AdminCriticos />} />
         
       </Routes>

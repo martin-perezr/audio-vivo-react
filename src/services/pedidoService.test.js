@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { crearPedido, listarPedidos } from './pedidoService'
+import { crearPedido, listarPedidos, obtenerPedido } from './pedidoService'
 import { obtenerProducto } from './productoService'
 
 const datos = {
@@ -33,5 +33,12 @@ describe('pedidoService', () => {
     expect(resultado.ok).toBe(false)
     expect(listarPedidos()).toHaveLength(0)
     expect(obtenerProducto(1).stock).toBe(antes)
+  })
+
+  it('obtenerPedido busca por número y devuelve null si no existe', () => {
+    const { pedido } = crearPedido(datos, [{ id: 1, nombre: 'Guitarra', precio: 129990, cantidad: 1 }])
+
+    expect(obtenerPedido(pedido.id).total).toBe(129990)
+    expect(obtenerPedido(999)).toBeNull()
   })
 })
