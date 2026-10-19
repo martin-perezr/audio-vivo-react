@@ -4,12 +4,15 @@ import { PlantillaPublica } from '../components/templates/PlantillaPublica/Plant
 import { Precio } from '../components/atoms/Precio/Precio'
 import { EtiquetaStock } from '../components/atoms/EtiquetaStock/EtiquetaStock'
 import { Boton } from '../components/atoms/Boton/Boton'
+import { useCarrito } from '../context/CarritoContext'
+import { hayStock } from '../utils/stock'
 
 // Página: detalle de un producto. Ruta: /producto/:id
 export default function DetalleProducto() {
   const navigate = useNavigate()
   const params = useParams()
   const { productos } = useProductos()
+  const { agregar } = useCarrito()
 
   // params.id llega como texto ("3"), por eso se convierte a número.
   const producto = productos.find((p) => p.id === Number(params.id))
@@ -39,6 +42,9 @@ export default function DetalleProducto() {
           <p>{producto.descripcion}</p>
           <Precio valor={producto.precio} />
           <EtiquetaStock stock={producto.stock} />
+          <Boton deshabilitado={!hayStock(producto)} onClick={() => agregar(producto)}>
+            Agregar al carrito
+          </Boton>
           {/* navigate(-1) vuelve a la página anterior, como el botón Atrás. */}
           <Boton variante="filtro" onClick={() => navigate(-1)}>Volver</Boton>
         </div>

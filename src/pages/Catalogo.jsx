@@ -5,11 +5,13 @@ import { PlantillaPublica } from '../components/templates/PlantillaPublica/Plant
 import { FiltroCategoria } from '../components/molecules/FiltroCategoria/FiltroCategoria'
 import { CatalogoProductos } from '../components/organisms/CatalogoProductos/CatalogoProductos'
 import { useTituloPagina } from '../hooks/useTituloPagina'
+import { useCarrito } from '../context/CarritoContext'
 
 export default function Catalogo() {
   const navigate = useNavigate()
-  const { slug = '' } = useParams() 
+  const { slug = '' } = useParams()
   const { productos } = useProductos()
+  const { agregar } = useCarrito()
 
   const categoria = categorias.find((c) => c.slug === slug)
   useTituloPagina(categoria ? categoria.nombre : 'Catálogo')
@@ -21,19 +23,15 @@ export default function Catalogo() {
     navigate(nuevoSlug ? `/categoria/${nuevoSlug}` : '/catalogo')
   }
 
-  function agregarAlCarrito(producto) {
-    console.log('Agregar al carrito:', producto.nombre)
-  }
-
   return (
     <PlantillaPublica>
       <h1 className="h2 text-center mb-4">
         {categoria ? categoria.nombre : 'Catálogo completo'}
       </h1>
       <FiltroCategoria categorias={categorias} activa={slug} onElegir={elegirCategoria} />
-      <CatalogoProductos productos={visibles} onAgregar={agregarAlCarrito} onVer={(id) => navigate(`/producto/${id}`)} />
-     
+      <CatalogoProductos productos={visibles} onAgregar={agregar} onVer={(id) => navigate(`/producto/${id}`)} />
+
     </PlantillaPublica>
   )
- 
+
 }
