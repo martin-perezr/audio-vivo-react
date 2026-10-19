@@ -6,6 +6,10 @@ import InicioSesion from './pages/InicioSesion'
 import Registro from './pages/Registro'
 import DetalleProducto from './pages/DetalleProducto'
 
+import AdminDashboard from './pages/admin/AdminDashboard'
+import AdminProductos from './pages/admin/AdminProductos'
+import AdminCriticos from './pages/admin/AdminCriticos'
+
 // App conecta cada dirección (URL) con su página.
 export default function App() {
   return (
@@ -18,6 +22,11 @@ export default function App() {
         <Route path="/registro" element={<Registro />} />
         <Route path="/producto/:id" element={<DetalleProducto />} />
         <Route path="*" element={<NoEncontrada />} />
+
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/productos" element={<AdminProductos />} />
+        <Route path="/admin/criticos" element={<AdminCriticos />} />
+        
       </Routes>
     </BrowserRouter>
   )
