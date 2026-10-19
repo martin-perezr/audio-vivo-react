@@ -48,3 +48,16 @@ export function validarConfirmacion(password, confirmacion) {
   }
   return ''
 }
+
+export function validarMensaje(texto) {
+  const mensaje = texto.trim()
+
+  if (mensaje.length < 10) {
+    return 'El mensaje debe tener al menos 10 caracteres.'
+  }
+
+  if (mensaje.length > 500) {
+    return 'El mensaje puede tener como máximo 500 caracteres.'
+  }
+  return ''
+}

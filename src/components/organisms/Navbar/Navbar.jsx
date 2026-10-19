@@ -3,8 +3,7 @@ import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container'
 import './Navbar.css'
 
-export function Navbar({ cantidadCarrito, onNavegar }) {
-    
+export function Navbar({ cantidadCarrito, onNavegar, usuario, onCerrarSesion }) {
   // Cada enlace es un <a href> real, pero el clic lo maneja el router (sin recargar la página).
   function ir(ruta) {
     return (e) => {
@@ -38,9 +37,28 @@ export function Navbar({ cantidadCarrito, onNavegar }) {
               <img className="icono-carrito" src="/img/shopping-cart.png" alt="Carrito de compras" />
               <span className="contador-carrito">{cantidadCarrito}</span>
             </Nav.Link>
-            <Nav.Link href="/login" onClick={ir('/login')}>
-              Iniciar Sesión
+            <Nav.Link href="/contacto" onClick={ir('/contacto')}>
+              Contáctanos
             </Nav.Link>
+            {usuario ? (
+              <>
+                {usuario.rol === 'admin' && (
+                  <Nav.Link href="/admin" onClick={ir('/admin')}>
+                    Administración
+                  </Nav.Link>
+                )}
+                <Nav.Link href="/mis-pedidos" onClick={ir('/mis-pedidos')}>
+                  Mis pedidos
+                </Nav.Link>
+                <Nav.Link as="button" type="button" onClick={onCerrarSesion}>
+                  Cerrar sesión ({usuario.nombre})
+                </Nav.Link>
+              </>
+            ) : (
+              <Nav.Link href="/login" onClick={ir('/login')}>
+                Iniciar Sesión
+              </Nav.Link>
+            )}
           </Nav>
         </BarraBootstrap.Collapse>
       </Container>
