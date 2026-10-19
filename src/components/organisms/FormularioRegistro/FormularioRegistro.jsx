@@ -23,7 +23,7 @@ export function FormularioRegistro({ onEnviar, error }) {
             nombre: validarNombre(datos.nombre),
             correo: validarCorreo(datos.correo),
             password: validarPassword(datos.password),
-            confirmacion: validarConfirmacion(datos.password, datos.confirmacion),
+            confirmacion: '',
         }
         setErrores(nuevosErrores)
 

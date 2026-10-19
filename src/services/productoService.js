@@ -1,5 +1,5 @@
 import productosIniciales from '../data/productos.json'
-const CLAVE = 'productos'
+const CLAVE = 'sonido_vivo_productos'
 
 function leer(){
     const guardado = localStorage.getItem(CLAVE)

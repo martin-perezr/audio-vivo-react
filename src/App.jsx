@@ -33,7 +33,6 @@ export default function App() {
         <Route path="/compra-fallida" element={<ResultadoCompra exito={false} />} />
         <Route path="/mis-pedidos" element={<MisPedidos />} />
         <Route path="*" element={<NoEncontrada />} />
-
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/admin/productos" element={<AdminProductos />} />
         <Route path="/admin/criticos" element={<AdminCriticos />} />
