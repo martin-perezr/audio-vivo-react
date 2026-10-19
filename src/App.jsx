@@ -6,6 +6,9 @@ import InicioSesion from './pages/InicioSesion'
 import Registro from './pages/Registro'
 import DetalleProducto from './pages/DetalleProducto'
 import Carrito from './pages/Carrito'
+import Checkout from './pages/Checkout'
+import ResultadoCompra from './pages/ResultadoCompra'
+import MisPedidos from './pages/MisPedidos'
 
 import AdminDashboard from './pages/admin/AdminDashboard'
 import AdminProductos from './pages/admin/AdminProductos'
@@ -23,6 +26,10 @@ export default function App() {
         <Route path="/registro" element={<Registro />} />
         <Route path="/producto/:id" element={<DetalleProducto />} />
         <Route path="/carrito" element={<Carrito />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/compra-exitosa" element={<ResultadoCompra exito />} />
+        <Route path="/compra-fallida" element={<ResultadoCompra exito={false} />} />
+        <Route path="/mis-pedidos" element={<MisPedidos />} />
         <Route path="*" element={<NoEncontrada />} />
 
         <Route path="/admin" element={<AdminDashboard />} />
