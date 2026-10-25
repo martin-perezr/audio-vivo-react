@@ -132,5 +132,5 @@ Cada integrante trabaja en su propia rama (`sem10/<nombre>-<tema>`) y la une a `
 
 ## Material complementario
 
-Carpeta de Drive con los documentos del semestre (ERS y otros):
-https://docs.google.com/document/d/1uXJkwkW-v7cms3Os6l3B5VIBBNBEkOpyYk8jSU-PbRg/edit?usp=drive_link
+Carpeta de Drive con los documentos de la Evaluación Parcial 2 (ERS versión 2 e informe de pruebas y cobertura):
+https://drive.google.com/drive/folders/1_-dlkS4pMDy27in66swgM5de4C8gpkc1?usp=drive_link
