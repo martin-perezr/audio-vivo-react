@@ -51,12 +51,6 @@ npm run dev
 
 Vite muestra en la terminal la dirección local para abrir la tienda (por defecto, `http://localhost:5173`).
 
-Para compilar la versión de producción:
-
-```bash
-npm run build
-```
-
 ## Cómo probar
 
 | Comando | Qué hace |
