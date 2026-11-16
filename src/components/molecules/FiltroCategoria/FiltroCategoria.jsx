@@ -1,9 +1,9 @@
 import { Selector } from '../../atoms/Selector/Selector'
 
-export function FiltroCategoria({ categorias, activa, onElegir }) {
+export function FiltroCategoria(props) {
   const opciones = [
     { valor: '', texto: 'Todas' },
-    ...categorias.map((c) => ({ valor: c.slug, texto: c.nombre })),
+    ...props.categorias.map((c) => ({ valor: c.slug, texto: c.nombre })),
   ]
 
   return (
@@ -13,9 +13,9 @@ export function FiltroCategoria({ categorias, activa, onElegir }) {
       </label>
       <Selector
         id="filtro-categoria"
-        valor={activa}
+        valor={props.activa}
         opciones={opciones}
-        onChange={onElegir}
+        onChange={props.onElegir}
       />
     </div>
   )

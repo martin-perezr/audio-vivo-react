@@ -1,15 +1,17 @@
 import Form from 'react-bootstrap/Form'
 import './CampoTexto.css'
 
-export function CampoTexto({ id, valor, onChange, tipo = 'text', placeholder, invalido = false }) {
+export function CampoTexto(props) {
+  const invalido = props.invalido === undefined ? false : props.invalido
+
   return (
     <Form.Control
-      id={id}
-      name={id}
-      type={tipo}
-      value={valor}
-      onChange={(e) => onChange(e.target.value)}
-      placeholder={placeholder}
+      id={props.id}
+      name={props.id}
+      type={props.tipo === undefined ? 'text' : props.tipo}
+      value={props.valor}
+      onChange={(e) => props.onChange(e.target.value)}
+      placeholder={props.placeholder}
       className={invalido ? 'campo-texto campo-error' : 'campo-texto'}
     />
   )

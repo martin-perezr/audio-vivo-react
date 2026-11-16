@@ -6,7 +6,7 @@ import { Footer } from '../../organisms/Footer/Footer'
 import { useCarrito } from '../../../context/CarritoContext'
 import { obtenerSesion, cerrarSesion } from '../../../services/usuarioService'
 
-export function PlantillaPublica({ children }) {
+export function PlantillaPublica(props) {
   const navigate = useNavigate()
   const { unidades } = useCarrito()
   const [usuario, setUsuario] = useState(obtenerSesion)
@@ -21,7 +21,7 @@ export function PlantillaPublica({ children }) {
     <>
       <Navbar cantidadCarrito={unidades} onNavegar={navigate} usuario={usuario} onCerrarSesion={salir} />
       <Container as="main" className="flex-grow-1 my-4">
-        {children}
+        {props.children}
       </Container>
       <Footer />
     </>

@@ -134,3 +134,7 @@ Cada integrante trabaja en su propia rama (`sem10/<nombre>-<tema>`) y la une a `
 
 Carpeta de Drive con los documentos de la Evaluación Parcial 2 (ERS versión 2 e informe de pruebas y cobertura):
 https://drive.google.com/drive/folders/1_-dlkS4pMDy27in66swgM5de4C8gpkc1?usp=drive_link
+
+## Repositorio del backend
+
+https://github.com/krinfyw/backend-fullstack-moviles

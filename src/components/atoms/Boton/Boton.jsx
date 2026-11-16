@@ -1,14 +1,16 @@
 import './Boton.css'
 
-export function Boton({ children, onClick, variante = 'comprar', tipo = 'button', deshabilitado = false }) {
+export function Boton(props) {
+  const variante = props.variante === undefined ? 'comprar' : props.variante
+
   return (
     <button
-      type={tipo}
+      type={props.tipo === undefined ? 'button' : props.tipo}
       className={`btn-${variante}`}
-      onClick={onClick}
-      disabled={deshabilitado}
+      onClick={props.onClick}
+      disabled={props.deshabilitado === undefined ? false : props.deshabilitado}
     >
-      {children}
+      {props.children}
     </button>
   )
 }

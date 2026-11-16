@@ -3,8 +3,8 @@ import { Boton } from '../../atoms/Boton/Boton'
 import { formatoPrecio } from '../../../utils/formatoPrecio'
 
 // Tabla de productos del panel. Si recibe onEditar y onEliminar, muestra los botones de acción.
-export function TablaProductos({ productos, onEditar, onEliminar }) {
-  const conAcciones = Boolean(onEditar && onEliminar)
+export function TablaProductos(props) {
+  const conAcciones = Boolean(props.onEditar && props.onEliminar)
 
   return (
     <Table striped bordered hover responsive className="align-middle">
@@ -19,7 +19,7 @@ export function TablaProductos({ productos, onEditar, onEliminar }) {
         </tr>
       </thead>
       <tbody>
-        {productos.map((producto) => (
+        {props.productos.map((producto) => (
           <tr key={producto.id}>
             <td>{producto.codigo}</td>
             <td>{producto.nombre}</td>
@@ -29,8 +29,8 @@ export function TablaProductos({ productos, onEditar, onEliminar }) {
             {conAcciones && (
               <td>
                 <div className="d-flex gap-2">
-                  <Boton variante="filtro" onClick={() => onEditar(producto)}>Editar</Boton>
-                  <Boton variante="filtro" onClick={() => onEliminar(producto)}>Eliminar</Boton>
+                  <Boton variante="filtro" onClick={() => props.onEditar(producto)}>Editar</Boton>
+                  <Boton variante="filtro" onClick={() => props.onEliminar(producto)}>Eliminar</Boton>
                 </div>
               </td>
             )}

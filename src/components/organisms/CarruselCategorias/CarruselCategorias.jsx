@@ -1,11 +1,11 @@
 import { TarjetaCategoria } from '../../molecules/TarjetaCategoria/TarjetaCategoria'
 import './CarruselCategorias.css'
 
-export function CarruselCategorias({ categorias, onVer }) {
+export function CarruselCategorias(props) {
   return (
     <div className="carrusel-categorias">
-      {categorias.map((categoria) => (
-        <TarjetaCategoria key={categoria.slug} categoria={categoria} onVer={onVer} />
+      {props.categorias.map((categoria) => (
+        <TarjetaCategoria key={categoria.slug} categoria={categoria} onVer={props.onVer} />
       ))}
     </div>
   )

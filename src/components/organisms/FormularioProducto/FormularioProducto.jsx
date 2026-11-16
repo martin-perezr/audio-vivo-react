@@ -14,8 +14,8 @@ const VACIO = {
 }
 
 // Formulario para crear o editar un producto. "inicial" trae los datos al editar ({} al crear).
-export function FormularioProducto({ inicial, productos, onGuardar, onCancelar }) {
-  const [datos, setDatos] = useState({ ...VACIO, ...inicial })
+export function FormularioProducto(props) {
+  const [datos, setDatos] = useState({ ...VACIO, ...props.inicial })
   const [errores, setErrores] = useState({})
 
   function cambiar(campo) {
@@ -24,10 +24,10 @@ export function FormularioProducto({ inicial, productos, onGuardar, onCancelar }
 
   function manejarEnvio(e) {
     e.preventDefault()
-    const nuevosErrores = validarProducto(datos, productos, inicial.id ?? null)
+    const nuevosErrores = validarProducto(datos, props.productos, props.inicial.id ?? null)
     setErrores(nuevosErrores)
     if (Object.keys(nuevosErrores).length === 0) {
-      onGuardar(datos)
+      props.onGuardar(datos)
     }
   }
 
@@ -75,7 +75,7 @@ export function FormularioProducto({ inicial, productos, onGuardar, onCancelar }
       </Row>
       <div className="d-flex gap-2">
         <Boton tipo="submit">Guardar</Boton>
-        <Boton variante="filtro" onClick={onCancelar}>Cancelar</Boton>
+        <Boton variante="filtro" onClick={props.onCancelar}>Cancelar</Boton>
       </div>
     </Form>
   )

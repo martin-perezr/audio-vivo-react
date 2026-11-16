@@ -5,7 +5,7 @@ import { Boton } from '../atoms/Boton/Boton'
 import { validarCorreo, validarPassword } from '../../utils/Validaciones'
 
 
-function Login({ onEnviar, error }) {
+function Login(props) {
   const [correo, setCorreo] = useState('')
   const [password, setPassword] = useState('')
   const [errores, setErrores] = useState({ correo: '', password: '' })
@@ -23,7 +23,7 @@ function Login({ onEnviar, error }) {
       return
     }
 
-    onEnviar({ correo, password })
+    props.onEnviar({ correo, password })
   }
 
   return (
@@ -50,9 +50,9 @@ function Login({ onEnviar, error }) {
 
       <Boton tipo="submit" variante="login">Ingresar</Boton>
 
-      {error && (
+      {props.error && (
         <p className="text-danger fw-bold text-center mt-3 mb-0" role="alert">
-          {error}
+          {props.error}
         </p>
       )}
     </Form>

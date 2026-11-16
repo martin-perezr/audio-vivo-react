@@ -1,16 +1,18 @@
 import './Selector.css'
 
-export function Selector({ id, valor, opciones = [], onChange }) {
+export function Selector(props) {
+  const opciones = props.opciones === undefined ? [] : props.opciones
+
   const handleChange = (e) => {
-    if (onChange) {
-      onChange(e.target.value)
+    if (props.onChange) {
+      props.onChange(e.target.value)
     }
   }
 
   return (
     <select
-      id={id}
-      value={valor}
+      id={props.id}
+      value={props.valor}
       onChange={handleChange}
       className="selector-atom"
     >

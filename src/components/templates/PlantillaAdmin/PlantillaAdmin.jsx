@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav'
 import { useNavigate } from 'react-router-dom'
 
 // Plantilla del panel de administración: menú propio y el contenido de cada página.
-export function PlantillaAdmin({ children }) {
+export function PlantillaAdmin(props) {
   const navigate = useNavigate()
 
   // Enlaces reales (<a href>) que navegan sin recargar la página.
@@ -35,7 +35,7 @@ export function PlantillaAdmin({ children }) {
         </Container>
       </BarraBootstrap>
       <Container as="main" className="flex-grow-1 my-4">
-        {children}
+        {props.children}
       </Container>
     </>
   )

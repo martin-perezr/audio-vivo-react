@@ -3,7 +3,7 @@ import * as productoService from '../services/productoService'
 
 const ProductosContext = createContext(null)
 
-export function ProductosProvider({ children }) {
+export function ProductosProvider(props) {
     const [productos, setProductos] = useState(() => productoService.listarProductos())
     function crear(datos){
         productoService.crearProducto(datos)
@@ -22,7 +22,7 @@ export function ProductosProvider({ children }) {
     }
     return (
         <ProductosContext.Provider value={{ productos, crear, actualizar, eliminar, recargar }}>
-            {children}
+            {props.children}
         </ProductosContext.Provider>
     )
 }

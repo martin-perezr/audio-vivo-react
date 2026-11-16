@@ -11,11 +11,11 @@ const OPCIONES_ENTREGA = [
 ]
 
 // Formulario de checkout. "inicial" trae el nombre y el correo de la sesión, para que se complete solo.
-export function FormularioCheckout({ inicial, onConfirmar }) {
+export function FormularioCheckout(props) {
   const [datos, setDatos] = useState({
-    nombre: inicial.nombre ?? '',
+    nombre: props.inicial.nombre ?? '',
     apellidos: '',
-    correo: inicial.correo ?? '',
+    correo: props.inicial.correo ?? '',
     entrega: 'despacho',
     direccion: '',
     comuna: '',
@@ -31,7 +31,7 @@ export function FormularioCheckout({ inicial, onConfirmar }) {
     const nuevosErrores = validarCheckout(datos)
     setErrores(nuevosErrores)
     if (Object.keys(nuevosErrores).length === 0) {
-      onConfirmar(datos)
+      props.onConfirmar(datos)
     }
   }
 

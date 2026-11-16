@@ -9,7 +9,7 @@ import {
     validarConfirmacion,
 } from '../../../utils/Validaciones'
 
-export function FormularioRegistro({ onEnviar, error }) {
+export function FormularioRegistro(props) {
     const [datos, setDatos] = useState({ nombre: '', correo: '', password: '', confirmacion: '' })
     const [errores, setErrores] = useState({})
 
@@ -23,14 +23,14 @@ export function FormularioRegistro({ onEnviar, error }) {
             nombre: validarNombre(datos.nombre),
             correo: validarCorreo(datos.correo),
             password: validarPassword(datos.password),
-            confirmacion: '',
+            confirmacion: validarConfirmacion(datos.password, datos.confirmacion),
         }
         setErrores(nuevosErrores)
 
         if (Object.values(nuevosErrores).some((mensaje) => mensaje !== '')) {
             return
         }
-        onEnviar(datos)
+        props.onEnviar(datos)
     }
 
     return (
@@ -46,9 +46,9 @@ export function FormularioRegistro({ onEnviar, error }) {
 
             <Boton tipo="submit" variante="login">Crear cuenta</Boton>
 
-            {error && (
+            {props.error && (
                 <p className="text-danger fw-bold text-center mt-3 mb-0" role="alert">
-                    {error}
+                    {props.error}
                 </p>
             )}
         </Form>

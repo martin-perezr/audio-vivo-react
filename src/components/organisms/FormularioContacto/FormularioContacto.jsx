@@ -13,7 +13,7 @@ const ASUNTOS = [
 
 const VACIO = { nombre: '', correo: '', asunto: 'producto', mensaje: '' }
 
-export function FormularioContacto({ onEnviar }) {
+export function FormularioContacto(props) {
   const [datos, setDatos] = useState(VACIO)
   const [errores, setErrores] = useState({})
 
@@ -33,7 +33,7 @@ export function FormularioContacto({ onEnviar }) {
     if (Object.values(nuevosErrores).some((mensaje) => mensaje !== '')) {
       return
     }
-    onEnviar(datos)
+    props.onEnviar(datos)
     setDatos(VACIO) // limpia el formulario
   }
 

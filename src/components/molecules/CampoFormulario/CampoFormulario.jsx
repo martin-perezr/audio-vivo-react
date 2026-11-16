@@ -1,13 +1,13 @@
 import { CampoTexto } from '../../atoms/CampoTexto/CampoTexto'
 
-export function CampoFormulario({ id, etiqueta, error, ...resto }) {
+export function CampoFormulario(props) {
   return (
     <div className="mb-3">
-      <label htmlFor={id} className="form-label fw-bold">
-        {etiqueta}
+      <label htmlFor={props.id} className="form-label fw-bold">
+        {props.etiqueta}
       </label>
-      <CampoTexto id={id} invalido={!!error} {...resto} />
-      {error && <div className="invalid-feedback d-block">{error}</div>}
+      <CampoTexto invalido={!!props.error} {...props} />
+      {props.error && <div className="invalid-feedback d-block">{props.error}</div>}
     </div>
   )
 }

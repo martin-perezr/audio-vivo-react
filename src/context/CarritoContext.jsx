@@ -10,7 +10,7 @@ function leerGuardado() {
   return JSON.parse(localStorage.getItem(CLAVE)) ?? []
 }
 
-export function CarritoProvider({ children }) {
+export function CarritoProvider(props) {
   const [items, setItems] = useState(leerGuardado)
 
   // Cada vez que cambian los items, se guardan en localStorage.
@@ -39,7 +39,7 @@ export function CarritoProvider({ children }) {
 
   return (
     <CarritoContext.Provider value={{ items, total, unidades, agregar, cambiarCantidad, quitar, vaciar }}>
-      {children}
+      {props.children}
     </CarritoContext.Provider>
   )
 }

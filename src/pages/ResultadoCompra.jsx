@@ -7,12 +7,12 @@ import { useTituloPagina } from '../hooks/useTituloPagina'
 
 // Página: resultado de la compra. Rutas: /compra-exitosa y /compra-fallida (ver App.jsx).
 // El checkout le pasa el pedido o el error con navigate(ruta, { state }).
-export default function ResultadoCompra({ exito }) {
+export default function ResultadoCompra(props) {
   const navigate = useNavigate()
   const { state } = useLocation()
-  useTituloPagina(exito ? 'Compra exitosa' : 'No se pudo completar la compra')
+  useTituloPagina(props.exito ? 'Compra exitosa' : 'No se pudo completar la compra')
 
-  if (exito && state?.pedido) {
+  if (props.exito && state?.pedido) {
     const { pedido } = state
     return (
       <PlantillaPublica>

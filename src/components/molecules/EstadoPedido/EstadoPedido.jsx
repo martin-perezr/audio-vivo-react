@@ -6,8 +6,8 @@ const PASOS = [
   { clave: 'entregado', texto: 'Entregado' },
 ]
 
-export function EstadoPedido({ estado }) {
-  const actual = PASOS.findIndex((paso) => paso.clave === estado)
+export function EstadoPedido(props) {
+  const actual = PASOS.findIndex((paso) => paso.clave === props.estado)
 
   return (
     <ol className="estado-pedido">
