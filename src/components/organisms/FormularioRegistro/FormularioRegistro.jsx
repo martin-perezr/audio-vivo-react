@@ -44,7 +44,9 @@ export function FormularioRegistro(props) {
             <CampoFormulario id="confirmacion" etiqueta="Repite la contraseña" tipo="password"
                 valor={datos.confirmacion} onChange={cambiar('confirmacion')} error={errores.confirmacion} />
 
-            <Boton tipo="submit" variante="login">Crear cuenta</Boton>
+            <Boton tipo="submit" variante="login" deshabilitado={props.enviando}>
+                {props.enviando ? 'Creando cuenta…' : 'Crear cuenta'}
+            </Boton>
 
             {props.error && (
                 <p className="text-danger fw-bold text-center mt-3 mb-0" role="alert">

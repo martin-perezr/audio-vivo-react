@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import { CampoFormulario } from './CampoFormulario/CampoFormulario'
 import { Boton } from '../atoms/Boton/Boton'
-import { validarCorreo, validarPassword } from '../../utils/Validaciones'
+import { validarCorreo } from '../../utils/Validaciones'
 
 
 function Login(props) {
@@ -15,7 +15,7 @@ function Login(props) {
 
     const nuevosErrores = {
       correo: validarCorreo(correo),
-      password: validarPassword(password),
+      password: password.trim() ? '' : 'Ingresa tu contraseña.',
     }
     setErrores(nuevosErrores)
 
@@ -44,11 +44,12 @@ function Login(props) {
         tipo="password"
         valor={password}
         onChange={setPassword}
-        placeholder="Mínimo 12 caracteres"
         error={errores.password}
       />
 
-      <Boton tipo="submit" variante="login">Ingresar</Boton>
+      <Boton tipo="submit" variante="login" deshabilitado={props.enviando}>
+        {props.enviando ? 'Ingresando…' : 'Ingresar'}
+      </Boton>
 
       {props.error && (
         <p className="text-danger fw-bold text-center mt-3 mb-0" role="alert">
