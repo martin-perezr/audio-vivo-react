@@ -7,6 +7,7 @@ import { CarritoProvider } from '../context/CarritoContext'
 
 beforeEach(() => {
   localStorage.clear()
+  sessionStorage.clear()
 })
 
 function renderizar(ui, ruta = '/') {
@@ -21,7 +22,10 @@ function renderizar(ui, ruta = '/') {
 
 describe('MisPedidos', () => {
   it('muestra solo los pedidos del cliente con sesión', () => {
-    localStorage.setItem('sesion', JSON.stringify({ nombre: 'Ana', correo: 'ana@correo.cl', rol: 'cliente' }))
+    sessionStorage.setItem('sesion', JSON.stringify({
+      id: 7, nombre: 'Ana', correo: 'ana@correo.cl', rol: 'cliente',
+      token: 'jwt-de-prueba', venceEn: Date.now() + 60_000,
+    }))
     localStorage.setItem('pedidos', JSON.stringify([
       { id: 1001, fecha: '20-10-2026', correo: 'ana@correo.cl', entrega: 'retiro', total: 3990, estado: 'preparacion', items: [] },
       { id: 1002, fecha: '20-10-2026', correo: 'otro@correo.cl', entrega: 'retiro', total: 3990, estado: 'preparacion', items: [] },

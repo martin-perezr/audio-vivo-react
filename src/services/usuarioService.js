@@ -1,58 +1,84 @@
-import usuariosIniciales from '../data/usuarios.json'
+import { enviarAuth, solicitarApi } from './authApi'
 
-const CLAVE = 'usuarios'
 const CLAVE_SESION = 'sesion'
 
-function leer() {
-    const guardado = localStorage.getItem(CLAVE)
-    if (guardado === null) {
-        localStorage.setItem(CLAVE, JSON.stringify(usuariosIniciales))
-        return [...usuariosIniciales]
-    }
-    return JSON.parse(guardado)
-}
+export async function registrarUsuario({ nombre, correo, password }) {
+    const respuesta = await enviarAuth('register', {
+        nombre: nombre.trim(),
+        correo: correo.trim().toLowerCase(),
+        password,
+    })
 
-
-export function registrarUsuario({ nombre, correo, password }) {
-    const lista = leer()
-    const correoLimpio = correo.trim().toLowerCase()
-
-    if (lista.some((u) => u.correo === correoLimpio)) {
+    if (respuesta.status === 409) {
         return { ok: false, error: 'Ese correo ya está registrado.' }
     }
-
-    const nuevo = {
-        id: Math.max(0, ...lista.map((u) => u.id)) + 1,
-        nombre: nombre.trim(),
-        correo: correoLimpio,
-        password,
-        rol: 'cliente',
+    if (respuesta.status < 200 || respuesta.status >= 300) {
+        return { ok: false, error: 'No se pudo crear la cuenta.' }
     }
-    localStorage.setItem(CLAVE, JSON.stringify([...lista, nuevo]))
-    return { ok: true, usuario: nuevo }
+    return { ok: true, usuario: respuesta.data }
 }
 
-
-export function iniciarSesion(correo, password){
+export async function iniciarSesion(correo, password) {
     const correoLimpio = correo.trim().toLowerCase()
-
-    const usuario = leer().find((u) => 
-        u.correo === correoLimpio &&
-        u.password === password
-    )
-    if (!usuario){
-        return null
+    const respuesta = await enviarAuth('login', { correo: correoLimpio, password })
+    if (respuesta.status === 401) return null
+    if (respuesta.status < 200 || respuesta.status >= 300) {
+        throw new Error('No se pudo iniciar sesión.')
     }
 
-    const sesion = {nombre: usuario.nombre, correo: usuario.correo, rol: usuario.rol}
-    localStorage.setItem(CLAVE_SESION, JSON.stringify(sesion))
+    const datos = respuesta.data
+    if (!Number.isInteger(datos?.id) || datos.id <= 0 ||
+        typeof datos.nombre !== 'string' || !datos.nombre.trim() ||
+        typeof datos.rol !== 'string' || !datos.rol.trim() ||
+        typeof datos.token !== 'string' || !datos.token.trim() ||
+        !Number.isFinite(datos.expiraEnSegundos) || datos.expiraEnSegundos <= 0) {
+        throw new Error('El servidor devolvió una sesión incompleta.')
+    }
+
+    const sesion = {
+        id: datos.id,
+        nombre: datos.nombre,
+        correo: correoLimpio,
+        rol: datos.rol.toLowerCase(),
+        token: datos.token,
+        venceEn: Date.now() + datos.expiraEnSegundos * 1000,
+    }
+    sessionStorage.setItem(CLAVE_SESION, JSON.stringify(sesion))
     return sesion
 }
 
-export function obtenerSesion(){
-    return JSON.parse(localStorage.getItem(CLAVE_SESION))
+export function obtenerSesion() {
+    // El demo anterior persistía usuarios y sesión en el navegador.
+    localStorage.removeItem('usuarios')
+    localStorage.removeItem(CLAVE_SESION)
+
+    let sesion
+    try {
+        sesion = JSON.parse(sessionStorage.getItem(CLAVE_SESION))
+    } catch {
+        cerrarSesion()
+        return null
+    }
+
+    if (!sesion?.token || !Number.isFinite(sesion.venceEn) || sesion.venceEn <= Date.now()) {
+        cerrarSesion()
+        return null
+    }
+    return sesion
 }
 
-export function cerrarSesion(){
-    localStorage.removeItem(CLAVE_SESION)
+export function cerrarSesion() {
+    sessionStorage.removeItem(CLAVE_SESION)
+}
+
+export function listarUsuarios(token) {
+    return solicitarApi('GET', '/usuarios', { token })
+}
+
+export function modificarUsuario(id, datos, token) {
+    return solicitarApi('PUT', '/usuarios/' + id, { data: datos, token })
+}
+
+export function desactivarUsuario(id, token) {
+    return solicitarApi('DELETE', '/usuarios/' + id, { token })
 }

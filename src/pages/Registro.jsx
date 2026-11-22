@@ -9,24 +9,34 @@ import './InicioSesion.css'
 export default function Registro() {
   const navigate = useNavigate()
   const [error, setError] = useState('')
+  const [enviando, setEnviando] = useState(false)
   useTituloPagina('Registro')
 
-  function registrar(datos) {
-    const resultado = registrarUsuario(datos)
-    if (!resultado.ok) {
-      setError(resultado.error)
-      return
+  async function registrar(datos) {
+    if (enviando) return
+    setError('')
+    setEnviando(true)
+    try {
+      const resultado = await registrarUsuario(datos)
+      if (!resultado.ok) {
+        setError(resultado.error)
+        return
+      }
+
+      const sesion = await iniciarSesion(datos.correo, datos.password).catch(() => null)
+      navigate(sesion ? '/' : '/login')
+    } catch (error) {
+      setError(error.message)
+    } finally {
+      setEnviando(false)
     }
-    // Al registrarse, queda con la sesión iniciada y vuelve al inicio.
-    iniciarSesion(datos.correo, datos.password)
-    navigate('/')
   }
 
   return (
     <PlantillaPublica>
       <section className="caja-login">
         <h1 className="h2 text-center mb-4">Crear cuenta</h1>
-        <FormularioRegistro onEnviar={registrar} error={error} />
+        <FormularioRegistro onEnviar={registrar} error={error} enviando={enviando} />
         <p className="text-center mt-4 mb-0">
           ¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link>
         </p>
