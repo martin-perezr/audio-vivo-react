@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import Inicio from './pages/Inicio'
 import Catalogo from './pages/Catalogo'
 import NoEncontrada from './pages/NoEncontrada'
@@ -16,6 +16,16 @@ import AdminProductos from './pages/admin/AdminProductos'
 import AdminComprobante from './pages/admin/AdminComprobante'
 import AdminHistorial from './pages/admin/AdminHistorial'
 import AdminCriticos from './pages/admin/AdminCriticos'
+import { obtenerSesion } from './services/usuarioService'
+
+function RutaAdmin() {
+  const sesion = obtenerSesion()
+
+  if (!sesion) return <Navigate to="/login" replace />
+  if (sesion.rol !== 'admin') return <Navigate to="/" replace />
+
+  return <Outlet />
+}
 
 // App conecta cada dirección (URL) con su página.
 export default function App() {
@@ -34,13 +44,16 @@ export default function App() {
         <Route path="/compra-exitosa" element={<ResultadoCompra exito />} />
         <Route path="/compra-fallida" element={<ResultadoCompra exito={false} />} />
         <Route path="/mis-pedidos" element={<MisPedidos />} />
+
+        <Route element={<RutaAdmin />}>
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/productos" element={<AdminProductos />} />
+          <Route path="/admin/pedidos/:id" element={<AdminComprobante />} />
+          <Route path="/admin/historial" element={<AdminHistorial />} />
+          <Route path="/admin/criticos" element={<AdminCriticos />} />
+        </Route>
+
         <Route path="*" element={<NoEncontrada />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/productos" element={<AdminProductos />} />
-        <Route path="/admin/pedidos/:id" element={<AdminComprobante />} />
-        <Route path="/admin/historial" element={<AdminHistorial />} />
-        <Route path="/admin/criticos" element={<AdminCriticos />} />
-        
       </Routes>
     </BrowserRouter>
   )
