@@ -1,4 +1,4 @@
-import { enviarAuth } from './authApi'
+import { enviarAuth, solicitarApi } from './authApi'
 
 const CLAVE_SESION = 'sesion'
 
@@ -69,4 +69,16 @@ export function obtenerSesion() {
 
 export function cerrarSesion() {
     sessionStorage.removeItem(CLAVE_SESION)
+}
+
+export function listarUsuarios(token) {
+    return solicitarApi('GET', '/usuarios', { token })
+}
+
+export function modificarUsuario(id, datos, token) {
+    return solicitarApi('PUT', '/usuarios/' + id, { data: datos, token })
+}
+
+export function desactivarUsuario(id, token) {
+    return solicitarApi('DELETE', '/usuarios/' + id, { token })
 }

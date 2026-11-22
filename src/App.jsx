@@ -17,6 +17,7 @@ import AdminComprobante from './pages/admin/AdminComprobante'
 import AdminHistorial from './pages/admin/AdminHistorial'
 import AdminCriticos from './pages/admin/AdminCriticos'
 import { obtenerSesion } from './services/usuarioService'
+import AdminUsuarios from './pages/admin/AdminUsuarios'
 
 function RutaAdmin() {
   const sesion = obtenerSesion()
@@ -51,6 +52,7 @@ export default function App() {
           <Route path="/admin/pedidos/:id" element={<AdminComprobante />} />
           <Route path="/admin/historial" element={<AdminHistorial />} />
           <Route path="/admin/criticos" element={<AdminCriticos />} />
+          <Route path="/admin/usuarios" element={<AdminUsuarios />} />
         </Route>
 
         <Route path="*" element={<NoEncontrada />} />

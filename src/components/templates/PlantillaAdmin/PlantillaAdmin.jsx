@@ -30,6 +30,7 @@ export function PlantillaAdmin(props) {
               <Nav.Link href="/admin/historial" onClick={ir('/admin/historial')}>Historial</Nav.Link>
               <Nav.Link href="/admin/criticos" onClick={ir('/admin/criticos')}>Stock crítico</Nav.Link>
               <Nav.Link href="/" onClick={ir('/')}>Ver tienda</Nav.Link>
+              <Nav.Link href="/admin/usuarios" onClick={ir('/admin/usuarios')}>Usuarios</Nav.Link>
             </Nav>
           </BarraBootstrap.Collapse>
         </Container>
